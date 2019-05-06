@@ -22,24 +22,17 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 function downloadImageByURL(url, filePath) {
   request.get(url)
-         .on('error', function(err){
-          console.log('Error: ', err.statusCode);
-         })
-         .on('response',function(response){
-            console.log('Downloading image...');
-         })
-         .on('end', function(){
-          console.log('Download complete.');
-         })
+         .on('error', function(err){})
+         .on('response',function(response){})
+         .on('end', function(){})
          .pipe(fs.createWriteStream(filePath));
 }
-
-downloadImageByURL('https://avatars2.githubusercontent.com/u/2741?v=3&s=466', 'avatars/kvirani.jpg')
-
 
 getRepoContributors("jquery", "jquery", function(err, result) {
   console.log("Errors:", err);
   result.forEach(function (object){
-      console.log(object.avatar_url);
-    });
+    var filePath = 'avatars/' + object.login + '.jpg';
+    downloadImageByURL(object.avatar_url, filePath);
+  });
 });
+
