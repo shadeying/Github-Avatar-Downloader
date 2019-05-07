@@ -12,7 +12,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }
 
   //It first create a file named 'avatars' in the current directory when the function invoked.
-  fs.mkdir('/avatars',function(){});
+  fs.mkdir('./avatars',function(){});
 
   //import github token from another module
   var token = require('./secrets').GITHUB_TOKEN;
