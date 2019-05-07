@@ -1,5 +1,6 @@
 var request = require('request');
 var fs = require('fs');
+require('dotenv').config();
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
@@ -15,7 +16,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
   fs.mkdir('./avatars',function(){});
 
   //import github token from another module
-  var token = require('./secrets').GITHUB_TOKEN;
+  const token = process.env.GITHUB_TOKEN;
 
   //concatenate repoOwner and repoName into url
   var options = {
