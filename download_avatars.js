@@ -4,6 +4,10 @@ var fs = require('fs');
 console.log('Welcome to the GitHub Avatar Downloader!');
 
 function getRepoContributors(repoOwner, repoName, cb) {
+  if(!repoOwner || !repoName){
+      console.log(`Error occured - Please make sure the details are entered in following order: \n"node download_avatars.js <owner> <repo>"`);
+      return;
+    }
 
   var token = require('./secrets').GITHUB_TOKEN;
 
@@ -29,7 +33,6 @@ function downloadImageByURL(url, filePath) {
 }
 
 getRepoContributors(process.argv[2], process.argv[3], function(err, result) {
-  console.log("Errors:", err);
   result.forEach(function (object){
     var filePath = 'avatars/' + object.login + '.jpg';
     downloadImageByURL(object.avatar_url, filePath);
